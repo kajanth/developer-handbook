@@ -21,7 +21,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
          script {
-            docker.withRegistry( '', registryCredential ) {
+            docker.withRegistry( 'https://registry-platform-services.platform.mnscorp.net', registryCredential ) {
             dockerImage.push()
           }
         }
