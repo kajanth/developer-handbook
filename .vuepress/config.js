@@ -22,8 +22,8 @@ module.exports = {
             {
                 title: 'Kubernetes',
                 children: [
-                    '/Kubernetes/architecting-applications-for-kubernetes',
-                    '/Kubernetes/links'
+                    '/kubernetes/architecting-applications-for-kubernetes',
+                    '/kubernetes/links'
                 ]
             },
             {

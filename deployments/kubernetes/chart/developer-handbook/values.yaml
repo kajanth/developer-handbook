@@ -20,7 +20,7 @@ handbook:
     imagePullSecrets: nexus-secret  
     image:
       name: registry-platform-services.platform.mnscorp.net/kajanth/developer-docs
-      tag: 24
+      tag: 25
       
 ingressDomain: perf
 
