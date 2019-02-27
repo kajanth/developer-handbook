@@ -13,7 +13,7 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-        dockerImage = docker.build registry + "kajanth/developer-docs:$BUILD_NUMBER"
+        dockerImage = docker.build + "registry-platform-services.platform.mnscorp.net/kajanth/developer-docs:$BUILD_NUMBER"
         /* docker.build("kajanth/developer-doc", "-f Dockerfile .") */
         /* app = docker.build("kajanth/testapp") */
     }
