@@ -3,9 +3,9 @@ name: developer-handbook
 description: A developer handbook!
 version: 1.0.0
 keywords:
-  - stakater
+  - developer
   - handbook
-home: https://github.com/stakater/developer-handbook
+home: https://github.com/kajanth/developer-handbook
 maintainers:
-- name: Stakater
-  email: stakater@aurorasolutions.io
+- name: none
+  email: none@none.io

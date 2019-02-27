@@ -15,9 +15,15 @@ module.exports = {
                     '/architecture/rest',
                     '/architecture/microservices/',
                     '/architecture/eda',
-                    '/architecture/architecting-applications-for-kubernetes',
                     '/architecture/12-factors',
                     '/architecture/object-calisthenics'
+                ]
+            },
+            {
+                title: 'Kubernetes',
+                children: [
+                    '/Kubernetes/architecting-applications-for-kubernetes',
+                    '/Kubernetes/links'
                 ]
             },
             {

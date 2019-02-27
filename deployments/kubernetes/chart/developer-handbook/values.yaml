@@ -5,17 +5,6 @@ handbook:
     version: 1.0.0    
   service:
     name: "developerhandbook"
-    annotations:
-      xposer.stakater.com/annotations: |-
-        kubernetes.io/ingress.class: external-ingress
-        ingress.kubernetes.io/force-ssl-redirect: true
-        certmanager.k8s.io/cluster-issuer: letsencrypt-production
-        forecastle.stakater.com/appName: Developer-Handbook
-        forecastle.stakater.com/expose: true
-        forecastle.stakater.com/icon: https://raw.githubusercontent.com/stakater/ForecastleIcons/master/book.png
-      config.xposer.stakater.com/IngressURLTemplate: "{{ `{{.Service}}-{{.Namespace}}.{{.Domain}}` }}"
-      config.xposer.stakater.com/Domain: stakater.com
-      config.xposer.stakater.com/TLS: "true"
     labels:
       expose: 'true'
   deployment:
@@ -27,10 +16,32 @@ handbook:
     replicas: 1
     podLabels:      
       app: developer-handbook
-    containerName: handbook
-    imagePullSecrets: docker-registry-secret 
-    
+    containerName: handbook  
+    imagePullSecrets: nexus-secret  
     image:
-      name: stakater/developer-handbook
-      tag: 1.0.0
+      name: registry-platform-services.platform.mnscorp.net/kajanth/developer-docs
+      tag: 24
+      
+ingressDomain: perf
 
+ingress:
+  ## If true, twistlock Ingress will be created
+  ##
+  enabled: true
+
+  ## Annotations for Alertmanager Ingress
+  ##
+  annotations:
+    kubernetes.io/ingress.class: nginx
+
+  ## Labels to be added to the Ingress
+  ##
+  labels: {}
+
+  ## Hostnames.
+  ## Must be provided if Ingress is enabled.
+  ##
+  # NOTE: This just host suffix name. Actual host name in the format - prometheus.<CLUSTER_INGRESS_NAME>.platform.mnscorp.net
+  hostsSuffix:
+    - platform.mnscorp.net
+  # hosts: []
