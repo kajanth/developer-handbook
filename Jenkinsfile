@@ -1,26 +1,47 @@
-node {
-    environment {
-        registry = "registry-platform-services.platform.mnscorp.net"
-        registryCredential = 'platform-services-docker-registry'
-        dockerImage = ''
-    }
-
-    stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
+pipeline {
+  environment {
+    registry = "registry-platform-services.platform.mnscorp.net/kajanth/developer-docs"
+    registryCredential = 'platform-services-docker-registry'
+    dockerImage = ''
+  }
+  agent any
+  tools {nodejs "node" }
+  stages {
+    stage('Cloning Git') {
+      steps {
         checkout scm
+      }
     }
-
-    stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-        /*dockerImage = docker.build + "registry-platform-services.platform.mnscorp.net/kajanth/developer-docs:$BUILD_NUMBER"*/
-        dockerImage = docker.build("registry-platform-services.platform.mnscorp.net/kajanth/developer-doc:$BUILD_NUMBER", "-f Dockerfile .")
-        /* app = docker.build("kajanth/testapp") */
+    stage('Build') {
+       steps {
+         sh 'npm install'
+       }
     }
-
-    stage('Deploy Image') {
-        docker.withRegistry( 'registry-platform-services.platform.mnscorp.net:443', 'platform-services-docker-registry') {
-        dockerImage.push()
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }
