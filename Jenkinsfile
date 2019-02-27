@@ -1,7 +1,14 @@
-#!/usr/bin/env groovy
-@Library('github.com/stakater/fabric8-pipeline-library@v2.10.2') _
+node {
 
-appWithDockerfileBuildRelease {
-    dockerRepositoryURL = 'docker.release.stakater.com:443'
-    deployApp = true
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+        docker.build("kajanth/developer-doc", "-f Dockerfile .")
+        /* app = docker.build("kajanth/testapp") */
+    }
 }
