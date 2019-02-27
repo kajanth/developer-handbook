@@ -19,7 +19,7 @@ node {
     }
 
     stage('Deploy Image') {
-        docker.withRegistry( '', registryCredential ) {
+        docker.withRegistry( '', platform-services-docker-registry) {
         dockerImage.push()
         }
     }
