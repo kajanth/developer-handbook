@@ -19,7 +19,7 @@ node {
     }
 
     stage('Deploy Image') {
-        docker.withRegistry( 'registry-platform-services.platform.mnscorp.net', 'platform-services-docker-registry') {
+        docker.withRegistry( 'registry-platform-services.platform.mnscorp.net:443', 'platform-services-docker-registry') {
         dockerImage.push()
         }
     }
