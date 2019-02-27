@@ -19,14 +19,8 @@ node {
     }
 
     stage('Deploy Image') {
-        docker.withRegistry( '', platform-services-docker-registry) {
+        docker.withRegistry( '', 'platform-services-docker-registry') {
         dockerImage.push()
-        }
-    }
-
-    stage('Remove Unused docker image') {
-        steps{
-            sh "docker rmi $registry:$BUILD_NUMBER"
         }
     }
 }
