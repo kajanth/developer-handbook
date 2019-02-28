@@ -85,7 +85,7 @@ module.exports = {
             }
         ],
 
-        repo: 'stakater/developer-handbook',
+        repo: 'DigitalInnovation/developer-handbook',
         editLinks: true,
         editLinkText: 'Help us improve this page!'
     }
