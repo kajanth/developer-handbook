@@ -4,20 +4,6 @@ A developer handbook!
 
 Local development
 
-## MacOS
+## Why this document ?
 
-All dependencies for the developer handbook is handled with yarn.
-
-```bash
-# install nodejs with brew
-brew install node
-
-# install yarn with npm
-npm install -g yarn
-
-# install dependencies with yarn
-yarn
-
-# start local development server
-yarn run dev
-```
+This is to help Development teams make decisions on how to approach development in the micro services and containers.
